@@ -1,0 +1,31 @@
+@startuml
+title FESC - Inscripción Intersemestral (TO-BE)
+|Estudiante|
+start
+:Login SSO;
+:Seleccionar materias;
+|Sistema Académico|
+fork
+:Validar requisitos automáticamente;
+fork again
+:Verificar cupos en tiempo real;
+fork again
+:Calcular valor y descuentos;
+end fork
+if (¿Todo correcto?) then (Sí)
+  |Tesorería|
+  :Pago en línea con pasarela;
+  if (¿Pago confirmado?) then (Sí)
+    |Sistema Académico|
+    :Registrar inscripción;
+    :Notificar a docentes;
+  else (No)
+    :Reintentar pago;
+  endif
+else (No)
+  :Mostrar errores y sugerencias;
+endif
+|Docente|
+:Confirmar participantes;
+stop
+@enduml

@@ -1,0 +1,30 @@
+@startuml
+title FESC - Inscripción Intersemestral (AS-IS)
+|Estudiante|
+start
+:Ingresar al portal;
+:Autenticarse;
+:Consultar materias;
+|Sistema Académico|
+:Validar prerrequisitos;
+if (¿Cumple requisitos?) then (Sí)
+  :Verificar cupos;
+  if (¿Hay cupos?) then (Sí)
+    :Calcular valor de matrícula;
+    |Tesorería|
+    :Procesar pago;
+    if (¿Pago aprobado?) then (Sí)
+      :Registrar inscripción;
+      |Docente|
+      :Recibir lista de inscritos;
+    else (No)
+      :Reintentar pago;
+    endif
+  else (No)
+    :Notificar falta de cupo;
+  endif
+else (No)
+  :Notificar rechazo;
+endif
+stop
+@enduml
